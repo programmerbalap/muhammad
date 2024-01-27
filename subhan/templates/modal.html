@@ -1,0 +1,122 @@
+<!-- Begin Quick View | Modal Area -->
+{% load static %}
+{% load humanize %}
+{% for mdp in modalproduk %}
+  <div class="modal fade modal-wrapper" id="exampleModalCenter{{mdp.id}}" > 
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+          <div class="modal-inner-area row">
+            <div class="col-lg-5 col-md-6 col-sm-6">
+              <!-- Product Details Left -->
+              <div class="product-details-left">
+                <div class="product-details-images slider-navigation-1">
+                  <div class="lg-image"><img src="{{mdp.gambar_satu.url}}" alt="{{mdp.nama_produk}}"></div>
+                  {% if mdp.gambar_satu %}
+                    <div class="lg-image">
+                    <img src="{{mdp.gambar_satu.url}}" alt="{{mdp.nama_produk}}">
+                    {% comment %} </a> {% endcomment %}
+                    </div>
+                  {% endif %}
+                  {% if mdp.gambar_dua %}
+                    <div class="lg-image">
+                    <img src="{{mdp.gambar_dua.url}}" alt="{{mdp.nama_produk}}">
+                    {% comment %} </a> {% endcomment %}
+                    </div>
+                  {% endif %}
+                  {% if mdp.gambar_tiga %}
+                    <div class="lg-image">
+                    <img src="{{mdp.gambar_tiga.url}}" alt="{{mdp.nama_produk}}">
+                    {% comment %} </a> {% endcomment %}
+                    </div>
+                  {% endif %}
+                  {% if mdp.gambar_empat %}
+                    <div class="lg-image">
+                    <img src="{{mdp.gambar_empat.url}}" alt="{{mdp.nama_produk}}">
+
+                    </div>
+                  {% endif %}
+                  {% if mdp.gambar_lima %}
+                    <div class="lg-image">
+                    <img src="{{mdp.gambar_lima.url}}" alt="{{mdp.nama_produk}}">
+                    {% comment %} </a> {% endcomment %}
+                    </div>
+                  {% endif %}
+                </div>    
+                <div class="product-details-thumbs slider-thumbs-1">
+                    <div class="sm-image"><img src="{{mdp.gambar.url}}" alt="{{mdp.nama_produk}}"></div>
+                    {% if mdp.gambar_satu %}
+                    <div class="sm-image"><img src="{{mdp.gambar_satu.url}}"alt="{{mdp.nama_produk}}"></div>
+                    {% endif %}
+                    {% if mdp.gambar_dua %}
+                    <div class="sm-image"><img src="{{mdp.gambar_dua.url}}" alt="{{mdp.nama_produk}}"></div>
+                    {% endif %}
+                    {% if mdp.gambar_tiga %}
+                    <div class="sm-image"><img src="{{mdp.gambar_tiga.url}}" alt="{{mdp.nama_produk}}"></div>
+                    {% endif %}
+                    {% if mdp.gambar_empat %}
+                    <div class="sm-image"><img src="{{mdp.gambar_empat.url}}" alt="{{mdp.nama_produk}}"></div>
+                    {% endif %}
+                    {% if mdp.gambar_lima %}
+                    <div class="sm-image"><img src="{{mdp.gambar_lima.url}}" aalt="{{mdp.nama_produk}}"></div>
+                    {% endif %}
+                </div>
+              </div>
+              <!--// Product Details Left -->
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-6">
+              <div class="product-details-view-content pt-60">
+                <div class="product-info">
+                  <h2>{{mdp.nama_produk}}</h2>
+                    {% if mdp.diskon == 0 %}
+                      <div class="price-box pt-20">
+                        <span class="new-price new-price-2">Rp. {{mdp.harga|intcomma}}</span>
+                      </div>
+                    {% else %}
+                      <span class="old-price"><s>Rp. {{mdp.harga|intcomma}}</s></span>
+                      Diskon <span class="discount-percentage">{{mdp.diskon}}%</span>
+                      <div class="price-box pt-20">
+                        <span class="new-price new-price-2">Rp. {{mdp.setelah_diskon|intcomma}}</span>
+                      </div>
+                    {% endif %}
+                  <div class="product-desc">
+                    <div class="text-justify">
+                      <span>{{mdp.keterangan|safe}} </span>
+                    </div>
+                  </div>
+                  <div class="single-add-to-cart">
+                    <form action="{% url "cart_add" mdp.id %}" method="post" class="cart-quantity">{% csrf_token %}
+                      <div class="quantity">
+                        <label>Quantity</label>
+                        <div class="cart-plus-minus">
+                          <input class="cart-plus-minus-box" name="quantity" value="1" type="text">
+                          <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                          <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                        </div>
+                      </div>
+                      {{ cart_product_form}}
+                      <button class="add-to-cart" type="submit">Tambah cart</button>
+                    </form>
+                  </div>
+                  <div class="product-additional-info pt-25">
+                    <a class="wishlist-btn" href="https://api.whatsapp.com/send?phone={{mdp.no_whatsup}}&text=Saya%20ingin%20pemesan%20product%20{{mdp.nama_produk}}%20apakah%20tersedia%20?%20"target="_blank"><i class="fa fa-whatsapp"></i>Beli Melalui WA</a>
+                      <div class="product-social-sharing pt-25">
+                      <ul>
+                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                        <li class="telegram"><a href="#"><i class="fa fa-telegram"></i>Telegram</a></li>
+                        <li class="whatsapp"><a href="#"><i class="fa fa-whatsapp"></i>Whatsapp</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+{% endfor %}
+
